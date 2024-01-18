@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://nvlson3yhbgc"]
+
+[ext_resource type="Script" path="res://addons/godot_volume_rendering/VolumeContainerNode.cs" id="1_thxsp"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="VolumeContainerNode" type="Node" parent="."]
+script = ExtResource("1_thxsp")

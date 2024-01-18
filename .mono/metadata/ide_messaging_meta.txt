@@ -1,2 +1,0 @@
-﻿33675
-/home/matias/Software/Godot_v3.4-stable_mono_x11_64/Godot_v3.4-stable_mono_x11.64

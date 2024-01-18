@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dn3p1tqufthpq"]
+
+[ext_resource type="Shader" path="res://addons/godot_volume_rendering/volume_rendering.gdshader" id="1_qdstg"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_qdstg")

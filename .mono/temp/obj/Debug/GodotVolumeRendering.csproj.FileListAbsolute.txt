@@ -1,9 +1,0 @@
-/media/matias/Data/GodotProjects/GodotVolumeRendering/.mono/temp/bin/Debug/GodotVolumeRendering.dll
-/media/matias/Data/GodotProjects/GodotVolumeRendering/.mono/temp/bin/Debug/GodotVolumeRendering.pdb
-/media/matias/Data/GodotProjects/GodotVolumeRendering/.mono/temp/obj/Debug/GodotVolumeRendering.csproj.AssemblyReference.cache
-/media/matias/Data/GodotProjects/GodotVolumeRendering/.mono/temp/obj/Debug/GodotVolumeRendering.GeneratedMSBuildEditorConfig.editorconfig
-/media/matias/Data/GodotProjects/GodotVolumeRendering/.mono/temp/obj/Debug/GodotVolumeRendering.AssemblyInfoInputs.cache
-/media/matias/Data/GodotProjects/GodotVolumeRendering/.mono/temp/obj/Debug/GodotVolumeRendering.AssemblyInfo.cs
-/media/matias/Data/GodotProjects/GodotVolumeRendering/.mono/temp/obj/Debug/GodotVolumeRendering.csproj.CoreCompileInputs.cache
-/media/matias/Data/GodotProjects/GodotVolumeRendering/.mono/temp/obj/Debug/GodotVolumeRendering.dll
-/media/matias/Data/GodotProjects/GodotVolumeRendering/.mono/temp/obj/Debug/GodotVolumeRendering.pdb

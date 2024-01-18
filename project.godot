@@ -6,21 +6,19 @@
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
 
-config_version=4
+config_version=5
 
 [application]
 
-config/name="GodotVolumeRendering"
-config/icon="res://icon.png"
+config/name="GodotVolRendTest"
+run/main_scene="res://scene.tscn"
+config/features=PackedStringArray("4.2", "C#", "Forward Plus")
+config/icon="res://icon.svg"
+
+[dotnet]
+
+project/assembly_name="GodotVolRendTest"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/godot_volume_rendering/plugin.cfg" )
-
-[physics]
-
-common/enable_pause_aware_picking=true
-
-[rendering]
-
-environment/default_environment="res://default_env.tres"
+enabled=PackedStringArray("res://addons/godot_volume_rendering/plugin.cfg")
