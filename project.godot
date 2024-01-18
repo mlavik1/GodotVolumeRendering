@@ -22,3 +22,7 @@ project/assembly_name="GodotVolRendTest"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/godot_volume_rendering/plugin.cfg")
+
+[rendering]
+
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)
