@@ -13,7 +13,7 @@ public partial class VolumeContainerNode : Node
 	{
 		Debug.WriteLine("Hello from VolumeContainerNode");
 		volumeContainer = new CsgBox3D();
-		RawDatasetImporter datasetImporter = new RawDatasetImporter("/home/matias/Projects/UnityVolumeRendering/DataFiles/VisMale.raw", 128, 256, 256, DataContentFormat.Uint8, Endianness.LittleEndian, 0);
+		RawDatasetImporter datasetImporter = new RawDatasetImporter(ProjectSettings.GlobalizePath("res://Datasets/VisMale.raw"), 128, 256, 256, DataContentFormat.Uint8, Endianness.LittleEndian, 0);
 		VolumeDataset dataset = datasetImporter.Import();
 		Godot.Collections.Array<Image> images = new Godot.Collections.Array<Image>();
 		float minVal = float.PositiveInfinity;
@@ -42,6 +42,7 @@ public partial class VolumeContainerNode : Node
 		dataTexture.Create(Image.Format.Rf, dataset.dimX, dataset.dimY, dataset.dimZ, false, images);
 		ShaderMaterial shaderMaterial = GD.Load<ShaderMaterial>("res://addons/godot_volume_rendering/volume_rendering.tres");
 		shaderMaterial.SetShaderParameter("data_tex", dataTexture);
+		shaderMaterial.SetShaderParameter("tf_tex", TransferFunctionDatabase.CreateTransferFunction().GetTexture());
 		volumeContainer.Material = shaderMaterial;
 		this.AddChild(volumeContainer);
 		base._EnterTree();

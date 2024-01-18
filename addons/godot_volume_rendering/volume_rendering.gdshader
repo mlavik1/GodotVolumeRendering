@@ -1,18 +1,17 @@
 shader_type spatial;
 render_mode unshaded;
 
-#define NUM_STEPS 512
+#define NUM_STEPS 2048
 
 uniform sampler3D data_tex;
+uniform sampler2D tf_tex;
 
 varying vec3 vertexLocal;
 varying vec3 camDirLocal;
 
 vec4 getTF1DColour(float density)
 {
-	vec3 col = density < 0.5 ? vec3(0.5, 0.4, 0.3) * (density * 2.0) : vec3(1.0, 1.0, 1.0) * (density);
-	float alpha = smoothstep(0.0, 1.0, density) * 0.1;
-	return vec4(col, alpha);
+	return texture(tf_tex, vec2(density, 0.0));
 }
 
 vec4 raymarch_dvr(vec3 rayStart, vec3 rayDir)
@@ -28,6 +27,8 @@ vec4 raymarch_dvr(vec3 rayStart, vec3 rayDir)
 		if (currPos.x < 0.0 || currPos.x >= 1.0 || currPos.y < 0.0 || currPos.y > 1.0 || currPos.z < 0.0 || currPos.z > 1.0)
             continue;
 		float density = texture(data_tex, currPos).x;
+		if (density < 0.1)
+			continue;
         vec4 src = getTF1DColour(density);
 		src.rgb *= src.a;
 		col = (1.0f - col.a) * src + col;
