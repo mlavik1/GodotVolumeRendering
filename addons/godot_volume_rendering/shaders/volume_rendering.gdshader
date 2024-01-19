@@ -1,13 +1,20 @@
 shader_type spatial;
 render_mode unshaded;
 
-#define NUM_STEPS 2048
+#define NUM_STEPS 1024
+#define JITTER_FACTOR 5.0
 
 uniform sampler3D data_tex;
 uniform sampler2D tf_tex;
+uniform sampler2D noise_tex;
 
 varying vec3 vertexLocal;
 varying vec3 camDirLocal;
+
+float getStepSize()
+{
+	return 1.732 /*greatest distance in box*/ / float(NUM_STEPS);
+}
 
 vec4 getTF1DColour(float density)
 {
@@ -16,7 +23,7 @@ vec4 getTF1DColour(float density)
 
 vec4 raymarch_dvr(vec3 rayStart, vec3 rayDir)
 {
-    const float stepSize = 1.732 /*greatest distance in box*/ / float(NUM_STEPS);
+    float stepSize = getStepSize();
 	vec4 col = vec4(0.0, 0.0, 0.0, 0.0);
 	for (int iStep = 0; iStep < NUM_STEPS; iStep++)
     {
@@ -38,7 +45,7 @@ vec4 raymarch_dvr(vec3 rayStart, vec3 rayDir)
 
 vec4 raymarch_mip(vec3 rayStart, vec3 rayDir)
 {
-    const float stepSize = 1.732 /*greatest distance in box*/ / float(NUM_STEPS);
+    float stepSize = getStepSize();
 	vec4 outColour = vec4(1.0, 1.0, 1.0, 0.0);
 	float maxDensity = 0.0;
 	for (int iStep = 0; iStep < NUM_STEPS; iStep++)
@@ -65,6 +72,8 @@ void vertex() {
 void fragment() {
 	vec3 rayStart = vertexLocal;
     vec3 rayDir = camDirLocal;
+	// Create a small random offset in order to remove artifacts
+	rayStart += (JITTER_FACTOR * rayDir * getStepSize()) * texture(noise_tex, UV).r;
 	vec4 outColour = raymarch_dvr(rayStart, rayDir);
 	ALBEDO = outColour.rgb;
 	ALPHA = outColour.a;

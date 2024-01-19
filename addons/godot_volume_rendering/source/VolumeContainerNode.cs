@@ -1,20 +1,25 @@
 #if TOOLS
 using Godot;
 using System;
-using System.Diagnostics;
-using UnityVolumeRendering;
 
 [Tool]
 public partial class VolumeContainerNode : Node
 {
 	private CsgBox3D volumeContainer = null;
 
-	public override void _EnterTree()
+	public void LoadDataset(VolumeDataset dataset)
 	{
-		Debug.WriteLine("Hello from VolumeContainerNode");
+		if (dataset == null)
+		{
+			return;
+		}
+
+		if (volumeContainer != null)
+		{
+			this.RemoveChild(volumeContainer);
+		}
 		volumeContainer = new CsgBox3D();
-		RawDatasetImporter datasetImporter = new RawDatasetImporter(ProjectSettings.GlobalizePath("res://Datasets/VisMale.raw"), 128, 256, 256, DataContentFormat.Uint8, Endianness.LittleEndian, 0);
-		VolumeDataset dataset = datasetImporter.Import();
+
 		Godot.Collections.Array<Image> images = new Godot.Collections.Array<Image>();
 		float minVal = float.PositiveInfinity;
 		float maxVal = float.NegativeInfinity;
@@ -40,11 +45,18 @@ public partial class VolumeContainerNode : Node
 		}
 		ImageTexture3D dataTexture = new ImageTexture3D();
 		dataTexture.Create(Image.Format.Rf, dataset.dimX, dataset.dimY, dataset.dimZ, false, images);
-		ShaderMaterial shaderMaterial = GD.Load<ShaderMaterial>("res://addons/godot_volume_rendering/volume_rendering.tres");
+		ShaderMaterial shaderMaterial = GD.Load<ShaderMaterial>("res://addons/godot_volume_rendering/shaders/volume_rendering.tres");
 		shaderMaterial.SetShaderParameter("data_tex", dataTexture);
 		shaderMaterial.SetShaderParameter("tf_tex", TransferFunctionDatabase.CreateTransferFunction().GetTexture());
+		NoiseTexture2D noiseTexture = new NoiseTexture2D();
+		noiseTexture.Noise = new FastNoiseLite();
+		shaderMaterial.SetShaderParameter("noise_tex", noiseTexture);
 		volumeContainer.Material = shaderMaterial;
 		this.AddChild(volumeContainer);
+	}
+
+	public override void _EnterTree()
+	{
 		base._EnterTree();
 	}
 
