@@ -9,9 +9,19 @@ public partial class GodotVolumeRenderingPlugin : EditorPlugin
 
 	public override void _EnterTree()
 	{
-		var script = GD.Load<Script>("res://addons/godot_volume_rendering/source/VolumeContainerNode.cs");
-        //var texture = GD.Load<Texture>("icon.png");
-        AddCustomType("VolumeContainerNode", "Node", script, null);
+		{
+			var script = GD.Load<Script>("res://addons/godot_volume_rendering/source/VolumeContainerNode.cs");
+			//var texture = GD.Load<Texture>("icon.png");
+			AddCustomType("VolumeContainerNode", "Node", script, null);
+		}
+		{
+			var script = GD.Load<Script>("res://addons/godot_volume_rendering/source/NumberEdit.cs");
+			AddCustomType("NumberEdit", "LineEdit", script, null);
+		}
+		{
+			var script = GD.Load<Script>("res://addons/godot_volume_rendering/source/RawDatasetImporterControl.cs");
+			AddCustomType("RawDatasetImporterControl", "Control", script, null);
+		}
 		volumeContainerNodeInspector = new VolumeContainerNodeInspector();
 		AddInspectorPlugin(volumeContainerNodeInspector);
 	}

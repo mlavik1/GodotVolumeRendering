@@ -17,14 +17,19 @@ public partial class VolumeContainerNodeInspector : EditorInspectorPlugin
         btnImport.Text = "Import dataset";
         btnImport.Pressed += () => {
             VolumeContainerNode volumeContainerNode = @object as VolumeContainerNode;
+
             EditorFileDialog fileDialog = new EditorFileDialog();
             fileDialog.FileMode = EditorFileDialog.FileModeEnum.OpenFile;
             fileDialog.CurrentDir = "res://Datasets";
             EditorInterface.Singleton.GetEditorViewport3D().AddChild(fileDialog);
             fileDialog.FileSelected += (string filePath) => {
-                RawDatasetImporter datasetImporter = new RawDatasetImporter(ProjectSettings.GlobalizePath("res://Datasets/VisMale.raw"), 128, 256, 256, DataContentFormat.Uint8, Endianness.LittleEndian, 0);
-                VolumeDataset dataset = datasetImporter.Import();
-                volumeContainerNode.LoadDataset(dataset);
+                RawDatasetImporterDialog importerDialog = new RawDatasetImporterDialog(ProjectSettings.GlobalizePath("res://Datasets/VisMale.raw"), 128, 256, 256, DataContentFormat.Uint8, Endianness.LittleEndian, 0);
+                importerDialog.Title = "Raw dataset import settings";
+                importerDialog.onDatasetLoaded += (VolumeDataset dataset) => {
+                    volumeContainerNode.LoadDataset(dataset);
+                };
+                EditorInterface.Singleton.GetEditorViewport3D().AddChild(importerDialog);
+                importerDialog.PopupCentered(new Vector2I(400, 300));
             };
             fileDialog.Popup();
         };
