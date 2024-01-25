@@ -36,4 +36,22 @@ I've seen a lot of people using my Unity plugin, but with Godot becoming more st
 
 Please let me know if there are any of these features you'd like me to prioritise.
 
+## How to use
+
+Add a VolumeContainerNode to your scene, select it and click "Import dataset" in its inspector.
+
+From there you can select a raw dataset to import, and specify how it should be imported.
+
+Support for more dataset formats are coming soon!
+
+## How to contribute
+
+Contributions are very welcome! You can either:
+- Create issues, to report bugs or make suggestions.
+- Create pull requests
+
+If you wish to contribute with code, maybe you could help out porting over features from [my Unity Volume Rendering plugin](https://github.com/mlavik1/UnityVolumeRendering)?
+
+See the list above for things that still need to be ported over to the Godot plugin.
+
 ![alt tag](media/screenshot2.jpg)
