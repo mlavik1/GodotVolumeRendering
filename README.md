@@ -1,10 +1,10 @@
 # Godot Volume Rendering
 
+## WORK ON THIS PROJECT HAS STOPPED, in favour of this better and much complete port of UnityVolumeRendering: https://github.com/riccardolops/GodotVolumetricRendering
+
 Volume rendering of 3D volumetric datasets, implemented in Godot.
 
 ![alt tag](media/screenshot1.jpg)
-
-**NOTE: WORK IN PROGRESS**
 
 This is (the beginning of) a Godot-port of the [volume rendering plugin for Unity](https://github.com/mlavik1/UnityVolumeRendering) that I have been developing for some time.
 I am hoping to find time to port over all features the Unity plugin has.
@@ -43,15 +43,5 @@ Add a VolumeContainerNode to your scene, select it and click "Import dataset" in
 From there you can select a raw dataset to import, and specify how it should be imported.
 
 Support for more dataset formats are coming soon!
-
-## How to contribute
-
-Contributions are very welcome! You can either:
-- Create issues, to report bugs or make suggestions.
-- Create pull requests
-
-If you wish to contribute with code, maybe you could help out porting over features from [my Unity Volume Rendering plugin](https://github.com/mlavik1/UnityVolumeRendering)?
-
-See the list above for things that still need to be ported over to the Godot plugin.
 
 ![alt tag](media/screenshot2.jpg)
